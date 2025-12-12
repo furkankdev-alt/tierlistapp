@@ -1,0 +1,69 @@
+========================================
+ LEAGUE OF LEGENDS TIER LIST
+ Nasil Calistirilir?
+========================================
+
+ADIM 1: GEREKSINIMLER
+---------------------
+- Node.js kurulu olmali (https://nodejs.org/)
+- Kurulu mu kontrol et: Komut satirinda "node --version" yaz
+- Eger kurulu degilse yukle ve bilgisayari yeniden baslat
+
+
+ADIM 2: ILK KURULUM (Sadece Bir Kez)
+-------------------------------------
+1. Projeyi istedigin yere cikar (Ornek: C:\Projeler\tierlist)
+2. "ilk-kurulum.bat" dosyasina CIFT TIKLA
+3. Bekle (2-3 dakika surebilir)
+4. "Kurulum Tamamlandi" mesajini gor
+
+
+ADIM 3: PROJEYI BASLAT
+-----------------------
+1. "start.bat" dosyasina CIFT TIKLA
+2. 2 pencere acilacak (Server ve Client)
+3. Tarayici otomatik acilacak
+4. Eger acilmazsa: http://localhost:5173
+
+
+PROJEYI KAPAT
+-------------
+- "stop.bat" dosyasina CIFT TIKLA
+veya
+- Acilan Server ve Client pencerelerini kapat
+
+
+SORUN GIDERME
+-------------
+Problem: "node komutu taninamadi" hatasi
+Cozum: Node.js'i yukle ve bilgisayari yeniden baslat
+
+Problem: "Port zaten kullanimda" hatasi
+Cozum: stop.bat calistir, sonra start.bat calistir
+
+Problem: Tarayici acilmadi
+Cozum: Manuel olarak http://localhost:5173 ac
+
+Problem: Sayfa bos gorunuyor
+Cozum: Server ve Client pencerelerinde hata var mi kontrol et
+
+
+DOSYALARIN ANLAMI
+-----------------
+ilk-kurulum.bat  -> Ilk kullanimda calistir (bagimlilik yukler)
+start.bat        -> Projeyi baslat
+stop.bat         -> Projeyi kapat
+client/          -> Onyz (Svelte)
+server/          -> Arka plan (Express.js)
+
+
+ONEMLI NOTLAR
+-------------
+- Proje hangi klasorde olursa olsun calisir
+- Internet baglantisi gerekli (ilk kurulumda)
+- Windows 10/11 gerekli
+- Ilk acilista 5-10 saniye surebilir
+
+
+Iyi Eglenceler! 🎮
+========================================

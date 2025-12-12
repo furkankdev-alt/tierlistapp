@@ -1,0 +1,253 @@
+========================================
+ YENİ ŞAMPİYON EKLEME REHBERİ
+ League of Legends Tier List Projesi
+========================================
+
+Bu rehber, projeye yeni bir şampiyon nasıl ekleneceğini adım adım açıklar.
+
+========================================
+ADIM 1: ŞAMPİYON BİLGİLERİNİ HAZIRLA
+========================================
+
+Eklemek istediğin şampiyon için şu bilgilere ihtiyacın var:
+
+1. Şampiyon Adı (örn: "Zaahen", "Ambessa", "Aurora")
+2. Rol(ler) (top, jungle, mid, adc, support)
+3. Görsel dosyası (PNG formatında)
+
+========================================
+ADIM 2: CHAMPIONS.JS DOSYASINI DÜZENLE
+========================================
+
+Konum: client/src/lib/champions.js
+
+ÖNEMLİ: Şampiyonlar ALFABETİK SIRADA tutulur!
+
+Örnek Ekleme:
+-------------
+
+Diyelim ki "Zaahen" adında bir top laner ekliyoruz.
+
+1. Dosyayı aç: client/src/lib/champions.js
+
+2. Alfabetik olarak nereye gireceğini bul:
+   - "Zaahen" Z harfi ile başlıyor
+   - "Yuumi"den SONRA gelir
+   - "Zac"dan ÖNCE gelir
+
+3. Yeni satırı ekle:
+
+   ÖNCE:
+   { id: 163, name: "Yuumi", image: "/champions/Yuumi.png", roles: ["support"] },
+   { id: 164, name: "Zac", image: "/champions/Zac.png", roles: ["jungle"] },
+
+   SONRA:
+   { id: 163, name: "Yuumi", image: "/champions/Yuumi.png", roles: ["support"] },
+   { id: 164, name: "Zaahen", image: "/champions/Zaahen.png", roles: ["top"] },
+   { id: 165, name: "Zac", image: "/champions/Zac.png", roles: ["jungle"] },
+
+4. SONRADAN GELEN TÜM ŞAMPİYONLARIN ID'SİNİ +1 ARTIR!
+   - Zac: 164 → 165
+   - Zed: 165 → 166
+   - Zeri: 166 → 167
+   - ... ve böyle devam et
+
+========================================
+ADIM 3: GÖRSEL DOSYASINI EKLE
+========================================
+
+Konum: client/static/champions/
+
+1. Görseli Hazırla:
+   - Format: PNG
+   - Boyut: Tercihen 120x120 veya kare oran
+   - İsimlendirme: BÜYÜK HARFLE BAŞLA, boşluksuz
+
+2. İsimlendirme Kuralları:
+
+   NORMAL İSİMLER:
+   - Aatrox → Aatrox.png
+   - Ahri → Ahri.png
+   - Zaahen → Zaahen.png
+
+   ÖZEL KARAKTERLER (apostrophe, tire vs):
+   - K'Sante → Ksante.png (apostrof kaldır)
+   - Kai'Sa → Kaisa.png (apostrof kaldır)
+   - Bel'Veth → Belveth.png (apostrof kaldır)
+   - Kha'Zix → Khazix.png (apostrof kaldır)
+   - Rek'Sai → RekSai.png (apostrof kaldır, Camel Case)
+
+   BOŞLUKLU İSİMLER:
+   - Aurelion Sol → AurelionSol.png (boşluk kaldır, Camel Case)
+   - Dr. Mundo → DrMundo.png (nokta kaldır, Camel Case)
+   - Jarvan IV → JarvanIV.png (boşluk kaldır)
+   - Lee Sin → LeeSin.png (boşluk kaldır, Camel Case)
+   - Master Yi → MasterYi.png (boşluk kaldır, Camel Case)
+   - Miss Fortune → MissFortune.png (boşluk kaldır, Camel Case)
+   - Twisted Fate → TwistedFate.png (boşluk kaldır, Camel Case)
+   - Xin Zhao → XinZhao.png (boşluk kaldır, Camel Case)
+   - Nunu & Willump → Nunu.png (& ve ikinci isim kaldır)
+
+3. Dosyayı Kopyala:
+   - Görseli "client/static/champions/" klasörüne kopyala
+   - İsmin champions.js'deki "image" değeri ile AYNI olmalı
+
+4. Riot CDN'den Otomatik İndirme (Opsiyonel):
+
+   Eğer şampiyon Riot'un resmi CDN'sinde varsa:
+
+   a) download-champions.js dosyasını aç
+   b) "champions" dizisine şampiyon adını ekle (dosya adı formatında)
+   c) Komutu çalıştır:
+
+      node download-champions.js
+
+   NOT: Yeni çıkan şampiyonlar hemen CDN'de olmayabilir!
+
+========================================
+ADIM 4: ROL ATAMASI
+========================================
+
+Roller şu şekilde tanımlanır:
+
+- "top"     → Top Lane
+- "jungle"  → Jungle
+- "mid"     → Mid Lane
+- "adc"     → ADC/Bot Lane
+- "support" → Support
+
+ÇOK ROLLİ ŞAMPİYONLAR:
+{ id: 13, name: "Aurora", image: "/champions/Aurora.png", roles: ["mid", "top"] }
+{ id: 11, name: "Ashe", image: "/champions/Ashe.png", roles: ["adc", "support"] }
+{ id: 30, name: "Ekko", image: "/champions/Ekko.png", roles: ["jungle", "mid"] }
+
+TEK ROLLİ ŞAMPİYONLAR:
+{ id: 1, name: "Aatrox", image: "/champions/Aatrox.png", roles: ["top"] }
+{ id: 7, name: "Amumu", image: "/champions/Amumu.png", roles: ["jungle"] }
+
+========================================
+ADIM 5: TEST ET
+========================================
+
+1. Server'ı başlat:
+   cd server
+   npm run dev
+
+2. Client'ı başlat:
+   cd client
+   npm run dev
+
+3. Tarayıcıda kontrol et:
+   - http://localhost:5173
+   - Yeni şampiyonun göründüğünü kontrol et
+   - Doğru role filtreleyelediğini test et
+   - Görselin yüklendiğini kontrol et
+
+4. DRAFTING SAYFASINDA:
+   - Şampiyon pool'unda görünüyor olmalı
+   - Rol filtresi çalışmalı
+   - Pick ve ban yapılabilmeli
+
+5. TIER LIST SAYFASINDA:
+   - Şampiyon pool'unda (en altta) görünüyor olmalı
+   - Arama çubuğunda bulunabilmeli
+   - Tier'lara sürüklenebilmeli
+
+   NOT: Eğer tier list'te şampiyon görünmüyorsa:
+   - Tarayıcıyı yenile (Ctrl + F5)
+   - Veya "New" butonuna tıklayarak tier list'i sıfırla
+   - Sistem artık otomatik olarak yeni şampiyonları algılayacak
+
+========================================
+ÖRNEK EKLEMELER
+========================================
+
+Örnek 1: Tek Rol (Top Laner)
+-----------------------------
+{ id: 164, name: "Zaahen", image: "/champions/Zaahen.png", roles: ["top"] }
+
+Örnek 2: Çok Rol (Mid/Support)
+-------------------------------
+{ id: 46, name: "Hwei", image: "/champions/Hwei.png", roles: ["mid", "support"] }
+
+Örnek 3: Özel Karakter (Apostrof)
+----------------------------------
+{ id: 56, name: "K'Sante", image: "/champions/Ksante.png", roles: ["top"] }
+
+Örnek 4: Boşluklu İsim
+-----------------------
+{ id: 12, name: "Aurelion Sol", image: "/champions/AurelionSol.png", roles: ["mid"] }
+
+========================================
+SIK KARŞILAŞILAN HATALAR
+========================================
+
+❌ HATA 1: Görsel Görünmüyor
+Çözüm: Dosya adının champions.js'deki "image" değeri ile TAM AYNI olduğunu kontrol et
+
+❌ HATA 2: Şampiyon Listede Yok
+Çözüm: champions.js dosyasını kaydettiğinden ve server'ı yeniden başlattığından emin ol
+
+❌ HATA 3: ID'ler Karışık
+Çözüm: Yeni şampiyon ekledikten SONRA gelen TÜM ID'leri +1 artırmayı unutma
+
+❌ HATA 4: Rol Filtresi Çalışmıyor
+Çözüm: roles: ["top"] şeklinde köşeli parantez içinde string olarak yazdığından emin ol
+
+❌ HATA 5: Alfabetik Sıra Bozuk
+Çözüm: Şampiyonların A'dan Z'ye sıralı olduğundan emin ol
+
+========================================
+İLERİ SEVİYE: TOPLU EKLEME
+========================================
+
+Birden fazla şampiyon ekleyeceksen:
+
+1. Hepsini alfabetik sıraya göre bir listede hazırla
+2. ID'leri son şampiyondan başlayarak sırayla ver
+3. Tüm görselleri client/static/champions/ klasörüne kopyala
+4. Tek seferde tüm değişiklikleri yap
+5. Test et
+
+========================================
+GÜVENLİK İPUÇLARI
+========================================
+
+✓ Değişiklik yapmadan ÖNCE yedek al
+✓ Her değişiklikten sonra test et
+✓ Bir seferde çok değişiklik yapma
+✓ Git kullanıyorsan, commit at
+
+========================================
+ÖNEMLİ BİLGİ: SİSTEM NASIL ÇALIŞIR?
+========================================
+
+DRAFTING SAYFASI:
+- Şampiyonları doğrudan champions.js dosyasından alır
+- Yeni şampiyon eklediğinde HEMEN görünür
+- localStorage'a sadece pick/ban durumlarını kaydeder
+
+TIER LIST SAYFASI:
+- Şampiyonları champions.js dosyasından alır
+- Tier yerleşimlerini localStorage'a kaydeder
+- Sayfa yüklendiğinde:
+  * Tier'lardaki şampiyonları localStorage'dan alır
+  * Pool'u champions.js'den oluşturur (tier'dakileri çıkarır)
+- Bu sayede yeni eklenen şampiyonlar otomatik pool'da görünür!
+
+Yeni şampiyon ekledikten sonra:
+1. Drafting sayfasında HEMEN görünür
+2. Tier List sayfasında pool'da HEMEN görünür
+3. Eğer görünmüyorsa tarayıcıyı yenile (Ctrl + F5)
+
+========================================
+YARDIM
+========================================
+
+Sorun yaşarsan:
+1. start.bat ile projeyi yeniden başlat
+2. Tarayıcının cache'ini temizle (Ctrl + F5)
+3. Console'da hata olup olmadığını kontrol et (F12)
+
+İyi Eğlenceler! 🎮
+========================================
