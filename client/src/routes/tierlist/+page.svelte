@@ -224,19 +224,18 @@
 		const newItems = e.detail.items;
 
 		if (activeTab === 'champions') {
-			if (searchQuery.trim() === '') {
-				// Arama yoksa direkt güncelle
+			// Filtre aktif mi kontrol et (arama VEYA rol filtresi)
+			const hasActiveFilter = searchQuery.trim() !== '' || selectedRoles.length > 0;
+
+			if (!hasActiveFilter) {
+				// Filtre yoksa direkt güncelle
 				championPool = newItems;
 			} else {
-				// Arama varsa, filtreye uymayan şampiyonları koru
+				// Filtre varsa, filtreye uymayan şampiyonları koru
 				const currentFilteredIds = new Set(filteredItems.map(c => c.id));
-				const newItemIds = new Set(newItems.map(c => c.id));
 
 				// Filtreye uymayan şampiyonlar (korunacak)
 				const unfilteredChampions = championPool.filter(c => !currentFilteredIds.has(c.id));
-
-				// Filtreden çıkarılan şampiyonlar (tier'a taşındı)
-				const removedFromFilter = filteredItems.filter(c => !newItemIds.has(c.id));
 
 				// Yeni pool = korunanlar + yeni filtrelenmiş öğeler
 				championPool = [...unfilteredChampions, ...newItems].sort((a, b) => a.name.localeCompare(b.name));
@@ -246,7 +245,6 @@
 				itemPool = newItems;
 			} else {
 				const currentFilteredIds = new Set(filteredItems.map(i => i.id));
-				const newItemIds = new Set(newItems.map(i => i.id));
 
 				const unfilteredItems = itemPool.filter(i => !currentFilteredIds.has(i.id));
 
